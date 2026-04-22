@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Estamos Contigo</title>
+  <style>
+    body {
+      font-family: Arial;
+      background-color: #f5f5f5;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    .pregunta {
+      margin: 20px;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #recomendaciones {
+      margin-top: 20px;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Estamos Contigo 💙</h1>
+<p>Encuesta anónima para identificar situaciones de violencia escolar</p>
+
+<form id="formulario">
+
+<div class="pregunta">
+<p>1. ¿Te insultan o se burlan de ti?</p>
+<select class="respuesta">
+  <option value="0">Nunca</option>
+  <option value="1">A veces</option>
+  <option value="2">Frecuentemente</option>
+  <option value="3">Siempre</option>
+</select>
+</div>
+
+<div class="pregunta">
+<p>2. ¿Te sientes excluido en el colegio?</p>
+<select class="respuesta">
+  <option value="0">Nunca</option>
+  <option value="1">A veces</option>
+  <option value="2">Frecuentemente</option>
+  <option value="3">Siempre</option>
+</select>
+</div>
+
+<div class="pregunta">
+<p>3. ¿Te han empujado o golpeado?</p>
+<select class="respuesta">
+  <option value="0">Nunca</option>
+  <option value="1">A veces</option>
+  <option value="2">Frecuentemente</option>
+  <option value="3">Siempre</option>
+</select>
+</div>
+
+<div class="pregunta">
+<p>4. ¿Tienes miedo de ir al colegio?</p>
+<select class="respuesta">
+  <option value="0">Nunca</option>
+  <option value="1">A veces</option>
+  <option value="2">Frecuentemente</option>
+  <option value="3">Siempre</option>
+</select>
+</div>
+
+<div class="pregunta">
+<p>5. ¿Te amenazan?</p>
+<select class="respuesta">
+  <option value="0">Nunca</option>
+  <option value="1">A veces</option>
+  <option value="2">Frecuentemente</option>
+  <option value="3">Siempre</option>
+</select>
+</div>
+
+<br>
+<button type="button" onclick="evaluar()">Ver resultado</button>
+
+</form>
+
+<div id="resultado"></div>
+<div id="recomendaciones"></div>
+
+<script>
+function evaluar() {
+  let respuestas = document.querySelectorAll(".respuesta");
+  let total = 0;
+
+  respuestas.forEach(r => {
+    total += parseInt(r.value);
+  });
+
+  let nivel = "";
+  let color = "";
+  let recomendaciones = "";
+
+  if (total <= 5) {
+    nivel = "Nivel bajo 🟢";
+    color = "green";
+    recomendaciones = "No se detectan señales graves, pero si algo te incomoda, habla con alguien de confianza.";
+  } 
+  else if (total <= 10) {
+    nivel = "Nivel medio 🟡";
+    color = "orange";
+    recomendaciones = "Podrías estar en una situación de riesgo. Habla con un profesor o tutor.";
+  } 
+  else {
+    nivel = "Nivel alto 🔴";
+    color = "red";
+    recomendaciones = "Es importante que busques ayuda inmediatamente. No estás solo.";
+  }
+
+  document.getElementById("resultado").innerHTML = "<span style='color:"+color+"'>" + nivel + "</span>";
+
+  document.getElementById("recomendaciones").innerHTML = `
+    <p>${recomendaciones}</p>
+    <p><b>Busca ayuda:</b></p>
+    <p>• Línea 100 (Perú)</p>
+    <p>• Plataforma SíseVe</p>
+    <p>• Habla con un profesor o psicólogo escolar</p>
+  `;
+}
+</script>
+
+</body>
+</html>
