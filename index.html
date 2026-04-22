@@ -19,10 +19,6 @@
       display: block;
     }
 
-    h1 {
-      color: #2c3e50;
-    }
-
     .card {
       background: white;
       margin: 15px auto;
@@ -63,16 +59,13 @@
 <!-- ENCUESTA -->
 <div id="encuesta" class="pantalla">
   <h1>Encuesta</h1>
-
   <div id="preguntas"></div>
-
   <button onclick="evaluar()">Ver resultado</button>
 </div>
 
 <!-- RESULTADO -->
 <div id="resultadoPantalla" class="pantalla">
   <h1>Resultado</h1>
-
   <h2 id="resultado"></h2>
   <p id="mensaje"></p>
 
@@ -91,13 +84,13 @@
 
 <script>
 
-// CAMBIAR PANTALLA
+// cambiar pantallas
 function mostrar(id) {
   document.querySelectorAll(".pantalla").forEach(p => p.classList.remove("activa"));
   document.getElementById(id).classList.add("activa");
 }
 
-// GENERAR 20 PREGUNTAS
+// preguntas
 let preguntasTexto = [
 "¿Te insultan o se burlan de ti?",
 "¿Te sientes excluido?",
@@ -137,7 +130,7 @@ preguntasTexto.forEach((texto, i) => {
   `;
 });
 
-// EVALUAR
+// evaluar
 function evaluar() {
   let total = 0;
   document.querySelectorAll(".respuesta").forEach(r => {
@@ -173,3 +166,4 @@ function evaluar() {
 
 </body>
 </html>
+ 
