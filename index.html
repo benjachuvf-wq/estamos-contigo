@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Estamos Contigo</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: #f0f2f5;
+      margin: 0;
+    }
+
+    .pantalla {
+      display: none;
+      padding: 30px;
+    }
+
+    .activa {
+      display: block;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    .card {
+      background: white;
+      margin: 15px auto;
+      padding: 15px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 500px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 20px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    a {
+      display: block;
+      margin: 5px;
+      color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<div id="inicio" class="pantalla activa">
+  <h1>Estamos Contigo 💙</h1>
+  <p>Encuesta anónima para identificar situaciones de violencia escolar.</p>
+  <p>Tu bienestar es importante. Esta herramienta puede ayudarte a reconocer si necesitas apoyo.</p>
+
+  <button onclick="mostrar('encuesta')">Comenzar</button>
+</div>
+
+<!-- ENCUESTA -->
+<div id="encuesta" class="pantalla">
+  <h1>Encuesta</h1>
+
+  <div id="preguntas"></div>
+
+  <button onclick="evaluar()">Ver resultado</button>
+</div>
+
+<!-- RESULTADO -->
+<div id="resultadoPantalla" class="pantalla">
+  <h1>Resultado</h1>
+
+  <h2 id="resultado"></h2>
+  <p id="mensaje"></p>
+
+  <div class="card">
+    <h3>¿Qué puedes hacer?</h3>
+    <p id="recomendaciones"></p>
+  </div>
+
+  <div class="card">
+    <h3>Busca ayuda</h3>
+    <a href="https://www.siseve.pe" target="_blank">SíseVe</a>
+    <a href="https://www.gob.pe/mimp" target="_blank">Ministerio de la Mujer</a>
+    <p>Línea 100 (Perú)</p>
+  </div>
+</div>
+
+<script>
+
+// CAMBIAR PANTALLA
+function mostrar(id) {
+  document.querySelectorAll(".pantalla").forEach(p => p.classList.remove("activa"));
+  document.getElementById(id).classList.add("activa");
+}
+
+// GENERAR 20 PREGUNTAS
+let preguntasTexto = [
+"¿Te insultan o se burlan de ti?",
+"¿Te sientes excluido?",
+"¿Te empujan o golpean?",
+"¿Tienes miedo de ir al colegio?",
+"¿Te amenazan?",
+"¿Difunden rumores sobre ti?",
+"¿Se burlan de tu apariencia?",
+"¿Te ignoran intencionalmente?",
+"¿Te quitan cosas?",
+"¿Te hacen sentir menos?",
+"¿Te han intimidado en redes sociales?",
+"¿Evitas ir al colegio por miedo?",
+"¿Te han obligado a hacer cosas?",
+"¿Te gritan constantemente?",
+"¿Te sientes solo?",
+"¿Te humillan en público?",
+"¿Sientes ansiedad en el colegio?",
+"¿Te han acosado en grupo?",
+"¿Te insultan por cómo eres?",
+"¿Sientes que nadie te apoya?"
+];
+
+let contenedor = document.getElementById("preguntas");
+
+preguntasTexto.forEach((texto, i) => {
+  contenedor.innerHTML += `
+    <div class="card">
+      <p>${i+1}. ${texto}</p>
+      <select class="respuesta">
+        <option value="0">Nunca</option>
+        <option value="1">A veces</option>
+        <option value="2">Frecuentemente</option>
+        <option value="3">Siempre</option>
+      </select>
+    </div>
+  `;
+});
+
+// EVALUAR
+function evaluar() {
+  let total = 0;
+  document.querySelectorAll(".respuesta").forEach(r => {
+    total += parseInt(r.value);
+  });
+
+  let nivel, mensaje, recomendaciones;
+
+  if (total <= 20) {
+    nivel = "Nivel bajo 🟢";
+    mensaje = "No se detectan señales graves.";
+    recomendaciones = "Mantente atento y habla si algo te incomoda.";
+  } 
+  else if (total <= 40) {
+    nivel = "Nivel medio 🟡";
+    mensaje = "Podrías estar en una situación de riesgo.";
+    recomendaciones = "Habla con un profesor, tutor o adulto de confianza.";
+  } 
+  else {
+    nivel = "Nivel alto 🔴";
+    mensaje = "Es importante buscar ayuda inmediata.";
+    recomendaciones = "No enfrentes esto solo. Busca ayuda profesional o institucional.";
+  }
+
+  document.getElementById("resultado").innerText = nivel;
+  document.getElementById("mensaje").innerText = mensaje;
+  document.getElementById("recomendaciones").innerText = recomendaciones;
+
+  mostrar("resultadoPantalla");
+}
+
+</script>
+
+</body>
+</html>
