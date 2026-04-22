@@ -84,7 +84,7 @@
 
 <script>
 
-// cambiar pantallas
+// cambiar pantalla
 function mostrar(id) {
   document.querySelectorAll(".pantalla").forEach(p => p.classList.remove("activa"));
   document.getElementById(id).classList.add("activa");
@@ -142,17 +142,31 @@ function evaluar() {
   if (total <= 20) {
     nivel = "Nivel bajo 🟢";
     mensaje = "No se detectan señales graves.";
-    recomendaciones = "Mantente atento y habla si algo te incomoda.";
+    recomendaciones = `
+• Mantente atento a cómo te sientes en el colegio  
+• Habla con alguien si algo te incomoda  
+• No ignores pequeñas señales de maltrato  
+    `;
   } 
   else if (total <= 40) {
     nivel = "Nivel medio 🟡";
     mensaje = "Podrías estar en una situación de riesgo.";
-    recomendaciones = "Habla con un profesor, tutor o adulto de confianza.";
+    recomendaciones = `
+• Habla con un profesor o tutor de confianza  
+• Busca apoyo en amigos o familiares  
+• No enfrentes la situación solo  
+• Registra lo que ocurre  
+    `;
   } 
   else {
     nivel = "Nivel alto 🔴";
     mensaje = "Es importante buscar ayuda inmediata.";
-    recomendaciones = "No enfrentes esto solo. Busca ayuda profesional o institucional.";
+    recomendaciones = `
+• Busca ayuda inmediata  
+• Contacta con un adulto responsable  
+• Usa plataformas oficiales como SíseVe  
+• No te quedes en silencio  
+    `;
   }
 
   document.getElementById("resultado").innerText = nivel;
@@ -166,4 +180,3 @@ function evaluar() {
 
 </body>
 </html>
- 
